@@ -1,31 +1,9 @@
 pipeline {
     agent any
-    environment {
-         PATH = "/usr/share/maven:$PATH"
-    }
     stages {
-        stage("Git Checkout"){
-            steps{
-                git credentialsId: 'Git Hub', url: 'https://github.com/narenazure/hello-world1.git'
-            }
-        }
-        stage("Maven Build"){
-            steps{
-                sh "mvn clean package"
-               
-            }
-        
-        }
-        stage("Deploy-Dev"){
-            steps{
-                sshagent(['tomcat-new']) {
-                sh '''
-                    scp -o StrictHostKeyChecking=no ubuntu@172.31.24.145:/root/tomcat/webapps
-                    ssh ubuntu@172.31.24.145 /root/tomcat/bin/shutdown.sh 
-                    ssh ubuntu@172.31.24.145 /root/tomcat/bin/startup.sh
-                '''
-            }
-            
+        stage('Welcome Step') {
+            steps { 
+                echo 'Welcome to LambdaTest'
             }
         }
     }
