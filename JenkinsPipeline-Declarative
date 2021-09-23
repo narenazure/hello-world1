@@ -1,0 +1,10 @@
+pipeline {
+    agent any
+    stages {
+        stage("Git Checkout"){
+            steps{
+                git credentialsId: 'Git Hub', url: 'https://github.com/narenazure/hello-world1.git'
+            }
+        }
+    }
+}
