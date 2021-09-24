@@ -1,9 +1,9 @@
 pipeline {
     agent any
     stages {
-        stage('Welcome Step') {
+        stage('Git Checkout') {
             steps { 
-                echo 'Welcome to LambdaTest'
+                echo 'git credentialsId: 'GitHub', url: 'https://github.com/narenazure/hello-world1.git''
             }
         }
     }
