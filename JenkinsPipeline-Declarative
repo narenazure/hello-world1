@@ -16,12 +16,14 @@ pipeline {
             }
         }
         stage('Deploy-Dev') {
-            sshagent(['tomcat-new']) {
+            steps {
+                sshagent(['tomcat-new']) {
                 sh """
                     scp -o StrictHostKeyChecking=no target/myweb.war ubuntu@172.31.28.167:/opt/tomcat/webapps/
                     ssh ubuntu@172.31.28.167:/opt/tomcat/bin/shutdown.sh
                     ssh ubuntu@172.31.28.167:/opt/tomcat/bin/startup.sh
                 """
+            }
             }
         }
     }
