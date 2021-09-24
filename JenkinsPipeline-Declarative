@@ -12,14 +12,14 @@ pipeline {
         stage('Maven Build') {
             steps { 
                 sh "mvn clean package"
-                sh "mv **/*.war myweb.war"
+               
             }
         }
         stage('Deploy-Dev') {
             steps {
                 sshagent(['tomcat-new']) {
                 sh """
-                    scp -o StrictHostKeyChecking=no myweb.war ubuntu@172.31.28.167:/opt/tomcat/webapps/
+                    scp -o StrictHostKeyChecking=no ubuntu@172.31.28.167:/opt/tomcat/webapps/
                     ssh ubuntu@172.31.28.167 /opt/tomcat/bin/shutdown.sh
                     ssh ubuntu@172.31.28.167 /opt/tomcat/bin/startup.sh
                 """
